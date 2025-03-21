@@ -1,34 +1,29 @@
 <div class="max-w-4xl mx-auto p-8">
-  <!-- Título -->
+  <!-- Título y Botón de Regreso -->
+  <div class="flex items-center mb-8">
+    <button class="cursor-pointer flex items-center text-blue-600 hover:text-blue-800" routerLink="/sistema_recursos_humanos/empleados">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+      </svg>
+      Atras
+    </button>
+  </div>
 
-  <button class="cursor-pointer"
-    routerLink="/sistema_recursos_humanos/empleados"
-  >
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-    </svg>
-      atras
-  </button>
-  <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">Detalles del Empleado</h2>
-
-
+  <h2 class="text-3xl font-semibold text-center text-gray-800 mb-8">Detalles del Empleado</h2>
 
   <!-- Contenedor de detalles -->
-  @if (dataEmpleado();as $empleado) {
+  @if (dataEmpleado(); as $empleado) {
   <div class="space-y-6">
+
     <!-- Fila con Nombre y Apellidos -->
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
       <div class="flex justify-between items-center">
         <span class="font-semibold text-gray-600">Nombres:</span>
-        <span class="text-gray-800">
-          {{$empleado.nombres}}
-        </span>
+        <span class="text-gray-800">{{$empleado.nombres}}</span>
       </div>
       <div class="flex justify-between items-center">
         <span class="font-semibold text-gray-600">Apellidos:</span>
-        <span class="text-gray-800">
-          {{$empleado.apellidos}}
-        </span>
+        <span class="text-gray-800">{{$empleado.apellidos}}</span>
       </div>
     </div>
 
@@ -36,15 +31,11 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
       <div class="flex justify-between items-center">
         <span class="font-semibold text-gray-600">Correo:</span>
-        <span class="text-gray-800">
-          {{$empleado.email}}
-        </span>
+        <span class="text-gray-800">{{$empleado.email}}</span>
       </div>
       <div class="flex justify-between items-center">
         <span class="font-semibold text-gray-600">Teléfono:</span>
-        <span class="text-gray-800">
-          {{$empleado.telefono}}
-        </span>
+        <span class="text-gray-800">{{$empleado.telefono}}</span>
       </div>
     </div>
 
@@ -52,15 +43,11 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
       <div class="flex justify-between items-center">
         <span class="font-semibold text-gray-600">Fecha de Ingreso:</span>
-        <span class="text-gray-800">
-          {{$empleado.fecha}}
-        </span>
+        <span class="text-gray-800">{{$empleado.fecha}}</span>
       </div>
       <div class="flex justify-between items-center">
         <span class="font-semibold text-gray-600">País:</span>
-        <span class="text-gray-800">
-          {{$empleado.pais}}
-        </span>
+        <span class="text-gray-800">{{$empleado.pais}}</span>
       </div>
     </div>
 
@@ -68,27 +55,20 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
       <div class="flex justify-between items-center">
         <span class="font-semibold text-gray-600">Sexo:</span>
-        <span class="text-gray-800">
-          {{$empleado.sexo}}
-        </span>
+        <span class="text-gray-800">{{$empleado.sexo}}</span>
       </div>
       <div class="flex justify-between items-center">
         <span class="font-semibold text-gray-600">Sueldo:</span>
-        <span class="text-gray-800">
-          {{$empleado.salerio | currency}}
-        </span>
+        <span class="text-gray-800">{{$empleado.salerio | currency}}</span>
       </div>
     </div>
 
     <!-- Dirección -->
     <div class="flex justify-between items-center">
       <span class="font-semibold text-gray-600">Dirección:</span>
-      <span class="text-gray-800">
-        {{$empleado.direccion}}
-      </span>
+      <span class="text-gray-800">{{$empleado.direccion}}</span>
     </div>
+
   </div>
-
-
   }
 </div>
