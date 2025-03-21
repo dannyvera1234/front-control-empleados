@@ -1,0 +1,47 @@
+<div class="flex justify-center items-center min-h-screen bg-gray-100">
+  <div class="flex flex-wrap justify-center items-center shadow-lg rounded-lg overflow-hidden bg-white w-full md:w-2/3">
+    <div class="w-full md:w-1/2 hidden md:block">
+      <img
+        src="https://image.freepik.com/free-vector/human-resource-concept-illustration_114360-4878.jpg"
+        alt="Recursos Humanos"
+        class="w-full h-full object-cover rounded-l-lg"
+      >
+    </div>
+
+    <div class="w-full md:w-1/2 p-10">
+      <h2 class="text-2xl font-bold text-center text-gray-800">Bienvenido</h2>
+      <p class="text-center text-gray-500 mb-6">Inicia sesión en tu cuenta</p>
+
+      <form [formGroup]="loginForm">
+        <div class="mb-4">
+          <label class="block text-gray-700">Correo Electrónico</label>
+          <input type="email" name="email"
+            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+        </div>
+
+        <div class="mb-4">
+          <label class="block text-gray-700">Contraseña</label>
+          <input type="password" name="password"
+            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+        </div>
+
+        <div class="flex justify-between items-center text-sm text-gray-600 mb-4">
+          <label>
+            <input type="checkbox" class="mr-2"> Recuérdame
+          </label>
+          <a href="#" class="text-blue-500 hover:underline">¿Olvidaste tu contraseña?</a>
+        </div>
+
+        <button  (click)="onSubmit()"
+          class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition">
+          Iniciar sesión
+        </button>
+      </form>
+
+      <p class="text-center text-gray-600 mt-4">
+        ¿No tienes una cuenta?
+        <a href="#" class="text-blue-500 hover:underline">Regístrate aquí</a>
+      </p>
+    </div>
+  </div>
+</div>

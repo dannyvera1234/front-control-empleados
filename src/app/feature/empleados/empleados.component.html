@@ -1,0 +1,60 @@
+<div class="flex flex-col md:flex-row justify-between items-center mb-4 bg-white  rounded-lg p-5">
+  <!-- Contenedor para encabezado y botones -->
+  <div class="w-full">
+    <!-- Encabezado con botones para agregar, exportar e importar -->
+    <div class="flex justify-between items-center mb-4">
+      <h2 class="text-2xl font-bold text-gray-800">Empleados</h2>
+      <div class="space-x-4">
+        <button class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md text-sm">
+          Agregar Empleado
+        </button>
+        <button class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md text-sm">
+          Exportar
+        </button>
+        <button class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-md text-sm">
+          Importar
+        </button>
+      </div>
+    </div>
+
+    <div class="overflow-x-auto bg-white shadow-md rounded-lg">
+      <table class="w-full table-auto border-separate border-spacing-0">
+        <thead class="bg-gray-800 text-white">
+          <tr>
+            <th class="px-6 py-4 border-b text-left text-sm font-medium">Nombres</th>
+            <th class="px-6 py-4 border-b text-left text-sm font-medium">Pais</th>
+            <th class="px-6 py-4 border-b text-left text-sm font-medium">Correo Electrónico</th>
+            <th class="px-6 py-4 border-b text-left text-sm font-medium">Teléfono</th>
+            <th class="px-6 py-4 border-b text-left text-sm font-medium">Acciones</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-700">
+          <!-- Ejemplo de fila dinámica (remplazar con datos reales) -->
+          @for (item of listEmpleados(); track $index) {
+            <tr class="hover:bg-gray-100 transition-colors duration-200">
+              <td class="px-6 py-4 border-b text-sm">{{ item.nombres + " " + item.apellidos }}</td>
+              <td class="px-6 py-4 border-b text-sm">{{ item.pais }}</td>
+              <td class="px-6 py-4 border-b text-sm">{{ item.email }}</td>
+              <td class="px-6 py-4 border-b text-sm">{{ item.telefono }}</td>
+              <td class="px-6 py-4 border-b">
+                <div class="flex space-x-3 justify-start">
+                  <button (click)="verDetalle(item.id)" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    Ver Detalle
+                  </button>
+                  <button (click)="editar(item.id)" class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-yellow-500">
+                    Editar
+                  </button>
+                  <button (click)="eliminar(item.id)" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-red-500">
+                    Eliminar
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+
+  </div>
+</div>
