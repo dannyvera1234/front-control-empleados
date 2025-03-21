@@ -1,6 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
-import { EmpleadosService } from '../../service';
-import { finalize, mergeMap, of } from 'rxjs';
+import { EMPLEADO_INITIAL_STATE } from './store/empleado.store';
 
 @Component({
   selector: 'app-empleados',
@@ -11,11 +10,24 @@ export class EmpleadosComponent {
 
   public readonly loading = signal(false);
   public readonly listEmpleados = signal<any | null>(null);
-  private readonly empleadosService = inject(EmpleadosService);
+
+
+  public readonly isOpen = signal(false);
+
+
+  empleadoStore= inject(EMPLEADO_INITIAL_STATE)
+
+  openModal() {
+    this.isOpen.set(true);
+  }
+
+  closeModal() {
+    this.isOpen.set(false);
+  }
 
 
   constructor() {
-    this.allEmpleados();
+    this.empleadoStore.allEmpleados();
   }
 
   verDetalle(id: number) {
@@ -29,13 +41,6 @@ export class EmpleadosComponent {
   eliminar(id: number) {
     console.log(id);
   }
-  allEmpleados() {
-    of(this.loading.set(true)).pipe(
-      mergeMap(() => this.empleadosService.allEmpleados()),
-      finalize(() => this.loading.set(false))
-    ).subscribe(data => {this.listEmpleados.set(data),
-      console.log(data);
-    });
-  }
+
 
 }

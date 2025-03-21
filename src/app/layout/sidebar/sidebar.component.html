@@ -7,32 +7,14 @@
     </div>
 
     <!-- Navegación -->
-    <ul class="flex flex-col space-y-2 overflow-y-auto text-gray-400">
+    <ul class="flex flex-col space-y-2 overflow-y-auto text-gray-400 ">
       <li>
-        <a class="flex items-center hover:bg-gray-200 px-4 py-3 rounded-md">
-          <span>Inicio</span>
+        <a [ngClass]="{'bg-gray-700 text-white': selectedItem() === 'empleados'}"
+          class="flex items-center hover:bg-gray-200 px-4 py-3 rounded-md" (click)="selectedItem.set('empleados')">
+          <span>Empleados</span>
         </a>
       </li>
-      <li>
-        <a class="flex items-center hover:bg-gray-200 px-4 py-3 rounded-md">
-          <span>Contacto</span>
-        </a>
-      </li>
-      <li>
-        <a class="flex items-center hover:bg-gray-200 px-4 py-3 rounded-md">
-          <span>Trabajo</span>
-        </a>
-      </li>
-      <li>
-        <a class="flex items-center hover:bg-gray-200 px-4 py-3 rounded-md">
-          <span>Chat</span>
-        </a>
-      </li>
-      <li>
-        <a class="flex items-center hover:bg-gray-200 px-4 py-3 rounded-md">
-          <span>Configuración</span>
-        </a>
-      </li>
+
     </ul>
 
     <!-- Línea -->
@@ -49,6 +31,4 @@
       </div>
     </div>
   </div>
-
-
 </div>

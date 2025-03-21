@@ -14,4 +14,8 @@ export class EmpleadosService {
   allEmpleados() {
     return this._http.get(`${environment.BASE_API_SISTEMA}/empleados`);
   }
+
+  delete(ide: number) {
+    return this._http.delete(`${environment.BASE_API_SISTEMA}/empleados/${ide}`);
+  }
 }
