@@ -18,4 +18,12 @@ export class EmpleadosService {
   delete(ide: number) {
     return this._http.delete(`${environment.BASE_API_SISTEMA}/empleados/${ide}`);
   }
+
+  addEmpleado(empleado: any) {
+    return this._http.post(`${environment.BASE_API_SISTEMA}/empleados`, empleado);
+  }
+
+  updateEmpleado(ide: any) {
+    return this._http.put(`${environment.BASE_API_SISTEMA}/empleados/${ide}`, ide);
+  }
 }

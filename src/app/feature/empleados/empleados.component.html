@@ -11,13 +11,15 @@
     <div class="flex justify-between items-center mb-4">
       <h2 class="text-2xl font-bold text-gray-800">Registro de Empleados</h2>
       <div class="space-x-4">
-        <button class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md text-sm">
+        <!-- <button class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md text-sm">
           Exportar
         </button>
         <button class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-md text-sm">
           Importar
-        </button>
-        <button class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md text-sm" (click)="openModal()">
+        </button> -->
+        <button class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md text-sm"
+          (click)="empleadoStore.openModal('addModal')"
+        >
           Agregar Empleado
         </button>
       </div>
@@ -27,6 +29,7 @@
       <table class="w-full table-auto border-separate border-spacing-0">
         <thead class="bg-gray-800 text-white">
           <tr>
+            <th class="px-6 py-4 border-b text-left text-sm font-medium">N°</th>
             <th class="px-6 py-4 border-b text-left text-sm font-medium">Nombres</th>
             <th class="px-6 py-4 border-b text-left text-sm font-medium">Apellidos</th>
             <th class="px-6 py-4 border-b text-left text-sm font-medium">Pais</th>
@@ -36,9 +39,9 @@
           </tr>
         </thead>
         <tbody class="text-gray-700">
-          <!-- Ejemplo de fila dinámica (remplazar con datos reales) -->
-          @for (item of empleadoStore.Listempleados()!.data! ; track $index) {
+          @for (item of empleadoStore.Listempleados()!.data!; track $index;) {
           <tr class="hover:bg-gray-100 transition-colors duration-200">
+            <td class="px-6 py-4 border-b">{{$index + 1}} </td>
             <td class="px-6 py-4 border-b text-sm">{{ item.nombres }}</td>
             <td class="px-6 py-4 border-b text-sm">{{ item.apellidos }}</td>
             <td class="px-6 py-4 border-b text-sm">{{ item.pais }}</td>
@@ -54,7 +57,7 @@
                   class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-yellow-500">
                   Editar
                 </button>
-                <button (click)="empleadoStore.deleteEmpleado(item.ide)"
+                <button (click)="empleadoStore.openModal('deleteModal'); empleadoStore.idEmpleado(item.ide)"
                   class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-red-500">
                   Eliminar
                 </button>
@@ -68,23 +71,39 @@
   </div>
 </div>
 }
-@if (isOpen()) {
+@if (empleadoStore.isModalOpen('deleteModal')) {
 @defer {
 <div class="fixed inset-0 flex items-center justify-center bg-black/50">
   <div class="bg-white p-6 rounded-lg shadow-lg w-96">
-    <h2 class="text-xl font-semibold mb-4">Título del Modal</h2>
-    <p class="text-gray-600 mb-4">Este es un modal en Angular con Tailwind CSS.</p>
-
-    <div class="flex justify-end">
-      <button (click)="closeModal()" class="bg-gray-400 text-white px-4 py-2 rounded-md mr-2">
-        Cancelar
-      </button>
-      <button (click)="closeModal()" class="bg-blue-600 text-white px-4 py-2 rounded-md">
-        Aceptar
-      </button>
-    </div>
+    <app-delete-empleado />
   </div>
 </div>
+}
+}
 
+@if (empleadoStore.isModalOpen('addModal')) {
+  @defer {
+
+
+  <div class="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
+    <div class="absolute inset-0 bg-black opacity-50"></div>
+
+    <div class="bg-white p-3 rounded-md shadow-lg w-full max-w-4xl z-10 relative">
+      <div class="flex justify-between items-center mb-6">
+        <h2 class="text-xl font-semibold text-gray-800">Agregar Nuevo Empleado</h2>
+        <button
+          (click)="empleadoStore.closeModal('addModal')"
+          class="text-gray-500 hover:text-gray-800 focus:outline-none">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Contenido del modal -->
+      <app-add-empleado></app-add-empleado>
+    </div>
+
+  </div>
 }
 }

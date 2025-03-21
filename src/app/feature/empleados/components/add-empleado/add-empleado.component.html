@@ -1,1 +1,76 @@
-<p>add-empleado works!</p>
+<form [formGroup]="empleadoForm">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <!-- Nombres -->
+    <div>
+      <label for="nombres" class="block text-sm font-medium text-gray-700">Nombres</label>
+      <input type="text" id="nombres" formControlName="nombres"
+        class="mt-1 block w-full p-2 border border-gray-300 rounded-md" required />
+    </div>
+
+    <!-- Apellidos -->
+    <div>
+      <label for="apellidos" class="block text-sm font-medium text-gray-700">Apellidos</label>
+      <input type="text" id="apellidos" formControlName="apellidos"
+        class="mt-1 block w-full p-2 border border-gray-300 rounded-md" required />
+    </div>
+
+    <!-- Correo Electrónico -->
+    <div>
+      <label for="email" class="block text-sm font-medium text-gray-700">Correo Electrónico</label>
+      <input type="email" id="email" formControlName="email"
+        class="mt-1 block w-full p-2 border border-gray-300 rounded-md" required />
+    </div>
+
+    <!-- Sexo -->
+    <div>
+      <label for="sexo" class="block text-sm font-medium text-gray-700">Sexo</label>
+      <select id="sexo" formControlName="sexo" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" required>
+        <option value="" disabled selected>Seleccionar</option>
+        <option value="Masculino">Masculino</option>
+        <option value="Femenino">Femenino</option>
+        <option value="Otro">Otro</option>
+      </select>
+    </div>
+
+    <!-- País -->
+    <div>
+      <label for="pais" class="block text-sm font-medium text-gray-700">País</label>
+      <input type="text" id="pais" formControlName="pais"
+        class="mt-1 block w-full p-2 border border-gray-300 rounded-md" required />
+    </div>
+
+    <!-- Teléfono -->
+    <div>
+      <label for="telefono" class="block text-sm font-medium text-gray-700">Teléfono</label>
+      <input type="text" id="telefono" formControlName="telefono"
+        class="mt-1 block w-full p-2 border border-gray-300 rounded-md" required />
+    </div>
+
+    <!-- Salario -->
+    <div>
+      <label for="salerio" class="block text-sm font-medium text-gray-700">Salario</label>
+      <input type="number" id="salerio" formControlName="salerio"
+        class="mt-1 block w-full p-2 border border-gray-300 rounded-md" required />
+    </div>
+
+    <!-- Fecha de Ingreso -->
+    <div>
+      <label for="fecha" class="block text-sm font-medium text-gray-700">Fecha de Ingreso</label>
+      <input type="date" id="fecha" formControlName="fecha"
+        class="mt-1 block w-full p-2 border border-gray-300 rounded-md" required />
+    </div>
+  </div>
+
+  <!-- Botón de Enviar -->
+  <div class="flex gap-4 justify-end mt-6">
+    <button type="button" class="px-4 py-2 bg-gray-400 text-white rounded-md hover:bg-gray-500"
+      (click)="empleadoStore.closeModal('addModal')">
+      Cancelar
+    </button>
+    <button
+      (click)="addEmpleado()"
+    class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
+      Guardar
+    </button>
+  </div>
+</form>

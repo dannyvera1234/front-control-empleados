@@ -1,0 +1,15 @@
+<h2 class="text-xl font-semibold mb-4">Eliminar Empleado</h2>
+<p class="text-gray-600 mb-4">¿Estas seguro de eliminar el empleado?</p>
+
+<div class="flex justify-end">
+  <button  class="bg-gray-400 text-white px-4 py-2 rounded-md mr-2"
+    (click)="empleadoStore.closeModal('deleteModal')"
+  >
+    Cancelar
+  </button>
+  <button class="bg-blue-600 text-white px-4 py-2 rounded-md"
+    (click)="empleadoStore.deleteEmpleado()"
+  >
+    Aceptar
+  </button>
+</div>
