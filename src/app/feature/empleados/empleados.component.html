@@ -1,25 +1,11 @@
-@if (empleadoStore.loading()) {
-<div class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
-  <div class="flex flex-col items-center">
-    <div class="w-12 h-12 border-4 border-blue-500 border-dashed rounded-full animate-spin"></div>
-    <p class="text-white mt-2">Cargando...</p>
-  </div>
-</div>
-}@else {
 <div class="flex flex-col md:flex-row justify-between items-center mb-4 bg-white  rounded-lg p-5">
   <div class="w-full">
     <div class="flex justify-between items-center mb-4">
       <h2 class="text-2xl font-bold text-gray-800">Registro de Empleados</h2>
       <div class="space-x-4">
-        <!-- <button class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md text-sm">
-          Exportar
-        </button>
-        <button class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-md text-sm">
-          Importar
-        </button> -->
+
         <button class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md text-sm"
-          (click)="empleadoStore.openModal('addModal')"
-        >
+          (click)="empleadoStore.openModal('addModal')">
           Agregar Empleado
         </button>
       </div>
@@ -38,7 +24,16 @@
             <th class="px-6 py-4 border-b text-left text-sm font-medium">Acciones</th>
           </tr>
         </thead>
+        @if (empleadoStore.loading()) {
+        <div class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
+          <div class="flex flex-col items-center">
+            <div class="w-12 h-12 border-4 border-blue-500 border-dashed rounded-full animate-spin"></div>
+            <p class="text-white mt-2">Cargando...</p>
+          </div>
+        </div>
+        }@else {
         <tbody class="text-gray-700">
+          @if (empleadoStore.Listempleados() && empleadoStore.Listempleados()!.data!.length > 0) {
           @for (item of empleadoStore.Listempleados()!.data!; track $index;) {
           <tr class="hover:bg-gray-100 transition-colors duration-200">
             <td class="px-6 py-4 border-b">{{$index + 1}} </td>
@@ -49,11 +44,11 @@
             <td class="px-6 py-4 border-b text-sm">{{ item.telefono }}</td>
             <td class="px-6 py-4 border-b">
               <div class="flex space-x-3 justify-start">
-                <button (click)="verDetalle(item.id)"
+                <button [routerLink]="item.ide"
                   class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
                   Ver Detalle
                 </button>
-                <button (click)="editar(item.id)"
+                <button
                   class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-yellow-500">
                   Editar
                 </button>
@@ -65,12 +60,19 @@
             </td>
           </tr>
           }
+          }@else {
+          <tr>
+            <td colspan="7" class="px-6 py-4 border-b text-center text-gray-600">No se encontraron empleados.</td>
+          </tr>
+          }
         </tbody>
+        }
       </table>
     </div>
   </div>
 </div>
-}
+
+
 @if (empleadoStore.isModalOpen('deleteModal')) {
 @defer {
 <div class="fixed inset-0 flex items-center justify-center bg-black/50">
@@ -82,28 +84,28 @@
 }
 
 @if (empleadoStore.isModalOpen('addModal')) {
-  @defer {
+@defer {
+<div class="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
+  <div class="absolute inset-0 bg-black opacity-50"></div>
 
-
-  <div class="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
-    <div class="absolute inset-0 bg-black opacity-50"></div>
-
-    <div class="bg-white p-3 rounded-md shadow-lg w-full max-w-4xl z-10 relative">
-      <div class="flex justify-between items-center mb-6">
-        <h2 class="text-xl font-semibold text-gray-800">Agregar Nuevo Empleado</h2>
-        <button
-          (click)="empleadoStore.closeModal('addModal')"
-          class="text-gray-500 hover:text-gray-800 focus:outline-none">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
-      </div>
-
-      <!-- Contenido del modal -->
-      <app-add-empleado></app-add-empleado>
+  <div class="bg-white p-3 rounded-md shadow-lg w-full max-w-4xl z-10 relative">
+    <div class="flex justify-between items-center mb-6">
+      <h2 class="text-xl font-semibold text-gray-800">  Agregar Nuevo Empleado</h2>
+      <button (click)="empleadoStore.closeModal('addModal')"
+        class="text-gray-500 hover:text-gray-800 focus:outline-none">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
     </div>
 
+    <!-- Contenido del modal -->
+
+    <app-add-empleado
+    ></app-add-empleado>
+
   </div>
+
+</div>
 }
 }

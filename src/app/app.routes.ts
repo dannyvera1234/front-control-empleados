@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
 
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: 'sistema_recursos_humanos/empleados', pathMatch: 'full' },
   {
     path: 'login',
     loadChildren: () => import('./components/login/login.routing'),
@@ -16,8 +16,8 @@ export const routes: Routes = [
     children: [
       {
         path: 'empleados',
-        loadComponent() {
-          return import('./feature/empleados/empleados.component').then(m => m.EmpleadosComponent)
+        loadChildren() {
+          return import('./feature/empleados/routes').then(m => m.default)
         }
       }
     ]

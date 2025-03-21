@@ -1,6 +1,7 @@
-import { EMPLEADO_INITIAL_STATE, EmpleadoState } from './../../store/empleado.store';
-import { Component, inject, signal } from '@angular/core';
+import { EMPLEADO_INITIAL_STATE } from './../../store/empleado.store';
+import { Component, inject, Input, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { EmpleadosService } from '../../../../service';
 
 @Component({
   selector: 'app-add-empleado',
@@ -8,6 +9,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
   templateUrl: './add-empleado.component.html',
 })
 export class AddEmpleadoComponent {
+
   private _fb = inject(FormBuilder);
   empleadoStore = inject(EMPLEADO_INITIAL_STATE)
 
@@ -20,7 +22,13 @@ export class AddEmpleadoComponent {
     telefono: ['', [Validators.required]],
     salerio: ['', [Validators.required]],
     fecha: ['', [Validators.required]],
+    direccion: ['', [Validators.required]]
   });
+
+
+  constructor() {
+
+  }
 
 
   public addEmpleado() {
@@ -28,8 +36,6 @@ export class AddEmpleadoComponent {
       this.empleadoForm.markAllAsTouched();
       return;
     }
-
-    this.empleadoStore.addEmpleado(this.empleadoForm.value);
+    this.empleadoStore.addEmpleado(this.empleadoForm.value, this.empleadoForm);
   }
-
 }

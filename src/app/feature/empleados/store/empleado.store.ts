@@ -66,6 +66,7 @@ export const EMPLEADO_INITIAL_STATE = signalStore(
             }, 1000);
           })
         ).subscribe((data) => {
+          console.log(data);
           patchState(store, { Listempleados: data });
         })
       },
@@ -87,7 +88,7 @@ export const EMPLEADO_INITIAL_STATE = signalStore(
           });
       },
 
-      addEmpleado(dataEmpleado: any) {
+      addEmpleado(dataEmpleado: any,form: any) {
         of(patchState(store, { loading: true }))
           .pipe(
             mergeMap(() => empleadoService.addEmpleado(dataEmpleado)),
@@ -99,28 +100,12 @@ export const EMPLEADO_INITIAL_STATE = signalStore(
             console.log(resp);
             const currentEmpleados = store.Listempleados();
             if (!currentEmpleados?.data) return;
-            const addEmpleado = [...currentEmpleados.data, dataEmpleado];
+            const addEmpleado = [...currentEmpleados.data, resp.data];
             patchState(store, { modals: { ...store.modals(), addModal: { isOpen: false } } });
             patchState(store, { Listempleados: { ...currentEmpleados, data: addEmpleado } });
+            form.reset();
           });
       },
-      // updateEmpleado(ide: any) {
-      //   of(patchState(store, { loading: true }))
-      //     .pipe(
-      //       mergeMap(() => empleadoService.updateEmpleado(dataEmpleado)),
-      //       finalize(() => {
-      //         patchState(store, { loading: false });
-      //       })
-      //     )
-      //     .subscribe((resp: any) => {
-      //       console.log(resp);
-      //       const currentEmpleados = store.Listempleados();
-      //       if (!currentEmpleados?.data) return;
-      //       const addEmpleado = [...currentEmpleados.data, dataEmpleado];
-      //       patchState(store, { modals: { ...store.modals(), editModal: { isOpen: false } } });
-      //       patchState(store, { Listempleados: { ...currentEmpleados, data: addEmpleado } });
-      //     });
-      // },
     }
   })
 );
